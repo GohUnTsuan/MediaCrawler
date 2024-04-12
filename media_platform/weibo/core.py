@@ -125,6 +125,8 @@ class WeiboCrawler(AbstractCrawler):
                         await weibo_store.update_weibo_note(note_item)
 
                 page += 1
+                # 在每次搜索操作后暂停三秒
+                await asyncio.sleep(5)
                 await self.batch_get_notes_comments(note_id_list)
 
     async def get_specified_notes(self):

@@ -109,6 +109,8 @@ class DouYinCrawler(AbstractCrawler):
             utils.logger.info(f"[DouYinCrawler.search] keyword:{keyword}, aweme_list:{aweme_list}")
             await self.batch_get_note_comments(aweme_list)
 
+            await asyncio.sleep(2)
+
     async def get_specified_awemes(self):
         """Get the information and comments of the specified post"""
         semaphore = asyncio.Semaphore(config.MAX_CONCURRENCY_NUM)

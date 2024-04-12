@@ -122,6 +122,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
                         await xhs_store.update_xhs_note(note_detail)
                         note_id_list.append(note_detail.get("note_id"))
                 page += 1
+                await asyncio.sleep(3)
                 utils.logger.info(f"[XiaoHongShuCrawler.search] Note details: {note_details}")
                 await self.batch_get_note_comments(note_id_list)
 
