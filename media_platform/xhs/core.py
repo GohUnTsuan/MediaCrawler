@@ -36,6 +36,11 @@ from .login import XiaoHongShuLogin
 
 
 class XiaoHongShuCrawler(AbstractCrawler):
+    # 延迟常量配置
+    MIN_DELAY = 3  # 最小延迟秒数
+    MAX_DELAY = 8  # 最大延迟秒数 
+    SEARCH_DELAY = 5  # 搜索间隔秒数
+    
     context_page: Page
     xhs_client: XiaoHongShuClient
     browser_context: BrowserContext
@@ -118,11 +123,14 @@ class XiaoHongShuCrawler(AbstractCrawler):
             config.CRAWLER_MAX_NOTES_COUNT = xhs_limit_count
         start_page = config.START_PAGE
         for keyword in config.KEYWORDS.split(","):
+            page = 1
+            while (page - start_page + 1) * xhs_limit_count <= config.CRAWLER_MAX_NOTES_COUNT:
+                # 添加搜索延迟
+                await asyncio.sleep(self.SEARCH_DELAY)
             source_keyword_var.set(keyword)
             utils.logger.info(
                 f"[XiaoHongShuCrawler.search] Current search keyword: {keyword}"
             )
-            page = 1
             search_id = get_search_id()
             while (
                 page - start_page + 1
@@ -286,6 +294,9 @@ class XiaoHongShuCrawler(AbstractCrawler):
         """
         note_detail_from_html, note_detail_from_api = None, None
         async with semaphore:
+            # 随机延迟
+            delay = random.uniform(self.MIN_DELAY, self.MAX_DELAY)
+            await asyncio.sleep(delay)
             # When proxy is not enabled, increase the crawling interval
             if config.ENABLE_IP_PROXY:
                 crawl_interval = random.random()
@@ -363,6 +374,8 @@ class XiaoHongShuCrawler(AbstractCrawler):
     ):
         """Get note comments with keyword filtering and quantity limitation"""
         async with semaphore:
+            # 添加评论获取延迟
+            await asyncio.sleep(self.MIN_DELAY)
             utils.logger.info(
                 f"[XiaoHongShuCrawler.get_comments] Begin get note id comments {note_id}"
             )
