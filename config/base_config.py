@@ -11,11 +11,7 @@
 
 # 基础配置
 PLATFORM = "xhs"
-<<<<<<< HEAD
-KEYWORDS = "核废水"
-=======
-KEYWORDS = "编程副业,编程兼职"  # 关键词搜索配置，以英文逗号分隔
->>>>>>> upstream/main
+KEYWORDS = ["TT","China", "refugee"]
 LOGIN_TYPE = "qrcode"  # qrcode or phone or cookie
 COOKIES = ""
 # 具体值参见media_platform.xxx.field下的枚举值，暂时只支持小红书
@@ -40,14 +36,10 @@ IP_PROXY_POOL_COUNT = 2
 # 代理IP提供商名称
 IP_PROXY_PROVIDER_NAME = "kuaidaili"
 
-<<<<<<< HEAD
-# 设置为True不会打开浏览器（无头浏览器），设置False会打开一个浏览器（小红书如果一直扫码登录不通过，打开浏览器手动过一下滑动验证码）
-=======
 # 设置为True不会打开浏览器（无头浏览器）
 # 设置False会打开一个浏览器
 # 小红书如果一直扫码登录不通过，打开浏览器手动过一下滑动验证码
 # 抖音如果一直提示失败，打开浏览器看下是否扫码登录之后出现了手机号验证，如果出现了手动过一下再试。
->>>>>>> upstream/main
 HEADLESS = False
 
 # 是否保存登录状态
@@ -63,11 +55,7 @@ USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
 START_PAGE = 1
 
 # 爬取视频/帖子的数量控制
-<<<<<<< HEAD
 CRAWLER_MAX_NOTES_COUNT = 100000
-=======
-CRAWLER_MAX_NOTES_COUNT = 200
->>>>>>> upstream/main
 
 # 并发爬虫数量控制
 MAX_CONCURRENCY_NUM = 1
